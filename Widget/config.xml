@@ -1,0 +1,10 @@
+<widget id="A6946993323496"  version="0.0.1">
+    <name>WebBrowserDemo</name>
+    <description>X福利社</description>
+    <author email="lala_mail@foxmail.com" href="http://www.x33.win">
+        developer
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+    <preference name="bounces" value="true" />
+</widget>
