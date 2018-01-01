@@ -1,10 +1,8 @@
 <widget id="A6946993323496"  version="0.0.1">
     <name>WebBrowserDemo</name>
-    <description>品美社</description>
-    <author email="lala_mail@foxmail.com" href="http://www.x33.win:9090">
+    <description>A sample of APICloud WebBrowser.</description>
+    <author email="developer@apicloud.com" href="http://www.apicloud.com">
         developer
     </author>
-    <content src="index.html" />
-    <access origin="*" />
-    <preference name="bounces" value="true" />
+    <content src="index.html" />     
 </widget>
