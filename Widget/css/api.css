@@ -49,7 +49,7 @@ html,body{
 
 #header h1{
 	text-align: center; 
-    font-size: 15px; 
+    font-size: 16px; 
 	height: 45px;
 	-webkit-box-flex:1; 
 	line-height: 45px; 
@@ -70,7 +70,8 @@ html,body{
 }
 
 .adpt {
-    width: 100px;
+    width: 100%;
+    text-align: center;
 }
 
 #footer{
