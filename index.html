@@ -1,0 +1,209 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>品美社</title>
+    <link rel="stylesheet" type="text/css" href="css/api.css" />
+    <link rel="stylesheet" type="text/css" href="css/box.css" />
+    <script type="text/javascript" src="script/public.js"></script>
+    <style>
+    	#footer{
+			width:auto; 
+			height:50px;
+			padding:0 8px; 
+			display:-webkit-box;
+			-webkit-box-orient:horizontal;
+			background-color: #078f5f; 
+		}
+		
+		.tab-item {
+		    height:50px;
+		  	-webkit-box-flex:1;
+		  	display:-webkit-box;
+		  	-webkit-box-orient:vertical;
+		  	-webkit-box-pack:center;
+		  	-webkit-box-align:center;
+		}
+		
+		center{
+			color:#FFF;
+			margin-top:3px;
+		    font-size:0.7em;
+		}
+		
+		#back > div{
+			width:48px;
+		    height:48px;
+			background:url(image/ic_back.png) no-repeat center; 
+			background-size:30px 30px;
+		}
+		
+		#forward > div{
+			width:48px;
+		    height:48px;
+			background:url(image/ic_forward.png) no-repeat center; 
+			background-size:30px 30px;
+		}
+		
+		#refresh > div{
+			width:48px;
+		    height:48px;
+			background:url(image/ic_refresh.png) no-repeat center; 
+			background-size:30px 30px;
+		}
+		
+		.active {
+			background-color:#33B5E5; 
+		}
+		
+		.text{
+			color:#FFF;
+		}
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <div id='header'>
+	        <div class="back" tapmode="back-active" onclick="shareAll()" >分享</div>
+	        <h1 id='title'>品美社</h1>
+	        <div class="adpt" ></div>
+		</div>
+        <div id="main">
+        
+        </div>
+        <div id='footer'>
+            <div id='back' class='tab-item' tapmode='active' onclick='GoToHisBack()'>
+            	<div></div>
+            </div>
+            <div id='forward' class='tab-item' tapmode='active' onclick='GoToHisForward()'>
+            	<div></div>
+            </div>
+            <div id='refresh' class='tab-item' tapmode='active' onclick='GoToRefresh()'>
+            	<div></div>
+            </div>
+            <div id='X' class='tab-item' tapmode='active' onclick='GoToHome()'>
+            	<div class='text'>首页</div>
+            </div>
+		</div>
+    </div>
+</body>
+<script type="text/javascript">
+
+	var home = "http://www.x33.win:9090";
+	var isViewOpened = false;
+	var X5broser = null;
+	var xurl = null;
+    apiready = function(){
+    	X5broser = api.require('webBrowser');
+    	api.addEventListener({
+		    name:'keyback'
+		},function(ret,err){
+		    api.closeWidget();
+		});
+		showBrowserView();
+    };
+    
+    
+    function showBrowserView(){
+    	isViewOpened = true;
+		
+		X5broser.openView({
+			url: 'http://www.x33.win:9090',
+			rect:{
+				marginTop:45,
+				marginBottom:50
+			},
+			progress:{
+				color:'#F0F'
+			}
+		}, onBroserStateChange);
+	}
+    
+    function closeBrowserView(){
+    	isViewOpened = false;
+    	X5broser.closeView();
+    	$('title').innerHTML = '品美社';
+    }
+    
+    function onBroserStateChange(ret){
+    	
+    	
+    	if(0 == ret.state){//BrowserView开始加载
+    		var url = ret.url;
+    		console.log('BrowserView loading start: ' + url);
+    	}else if(1 == ret.state){//BrowserView加载进度发生变化
+    		var p = ret.progress;
+    		console.log('BrowserView loading: ' + p);
+    	}else if(2 == ret.state){//BrowserView结束加载
+    		var url = ret.url;    		
+    		console.log('BrowserView loading finish: ' + url);
+    	}else if(3 == ret.state){//BrowserView标题发生变化
+    		$('title').innerHTML = ret.title;
+    		xurl = ret.url;
+    	}
+    }
+    
+    function GoToHisBack(){
+    	if(!isViewOpened){
+    		api.toast({msg:'我也是有底线的，不能再让步了！'});
+    		return;
+    		//GoToHisForward();
+    	}
+    	X5broser.historyBack(function(ret){
+    		if(!ret.status){
+    		api.toast({msg:'我也是有底线的，不能再让步了！'});
+    			//api.closeWin();
+    			//closeBrowserView();
+    		}
+    	});
+    }
+    
+    function GoToHisForward(){
+    	if(!isViewOpened){
+    		api.toast({msg:'脱光了，正在重新加载主页！'});
+    		//return;
+    		showBrowserView();
+    	}
+    	X5broser.historyForward(function(ret){
+    		if(!ret.status){
+    			//api.closeWin();
+    		}
+    	});
+    }
+    
+    function GoToRefresh(){
+    	if(!isViewOpened){
+    		api.toast({msg:'脱光了，正在重新加载主页！'});
+    		//return;
+    		showBrowserView();
+    	}
+    	X5broser.loadScript({
+            script: 'location.reload();'
+        });
+    }
+    
+    function GoToHome(){
+    	showBrowserView();
+    	if(!isViewOpened){
+    		api.toast({msg:'脱光了，正在重新加载主页！'});
+    		return;
+    		
+    	}
+    	X5broser.loadUrl({
+            url: home
+        });
+    }
+    
+    function shareAll(){
+    	   
+    var sharedModule = api.require('shareAction');
+			sharedModule.share({
+    				text: '我正在品美社欣赏美女，你也来看看吧！ http://www.x33.win:9090',
+    				type: 'text'
+								});
+						
+						}
+</script>
+</html>
