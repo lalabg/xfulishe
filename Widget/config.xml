@@ -1,7 +1,7 @@
 <widget id="A6946993323496"  version="0.0.1">
     <name>WebBrowserDemo</name>
-    <description>X福利社</description>
-    <author email="lala_mail@foxmail.com" href="http://www.x33.win">
+    <description>品美社</description>
+    <author email="lala_mail@foxmail.com" href="http://www.x33.win:9090">
         developer
     </author>
     <content src="index.html" />
