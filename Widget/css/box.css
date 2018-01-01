@@ -39,7 +39,7 @@
 }
 
 .active{ /**九宫格项点击效果**/
-	background-color: #CCC !important;
+	background-color: #CCCCCC !important;
 }
 
 .clickitem { /**九宫格项**/
@@ -75,7 +75,7 @@
 
 .itemtitle{ /**标题项**/
 	margin:20px 5px;
-	color:#222;
+	color:#222222;
 	font-size:14px;
 	border-bottom:1px solid;
 }
@@ -87,7 +87,7 @@ input{
     font-size:15px;
     padding:4px;
 	border-color: #CCCCCC #CCCCCC #BBBBBB;
-	background-color:#FFF;
+	background-color:#FFFFFF;
     -webkit-border-radius: 2px;
     width: auto;
     margin:3px 15px;
